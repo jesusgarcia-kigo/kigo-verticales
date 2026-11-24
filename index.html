@@ -365,6 +365,40 @@ html,body{height:100%;overflow:hidden}
 .lang button[aria-pressed="true"]{background:var(--ink);color:#06101B}
 .lang button:focus-visible{outline:2px solid var(--blue-soft);outline-offset:2px}
 @media (max-width:900px){.bar .right{gap:6px}.where{min-width:0;padding:6px 10px;font-size:.62rem}.lang button{min-width:34px}}
+.tagrow{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:0 0 16px;height:26px}
+.tagrow .tag{margin:0}
+.vstage .tagrow{margin-bottom:16px}
+.rdbtn,.rdback{all:unset;box-sizing:border-box;cursor:pointer;display:inline-flex;align-items:center;height:30px;padding:0 14px;border-radius:999px;border:1px solid rgba(255,105,0,.6);background:rgba(255,105,0,.1);color:#FFB070;font:600 .74rem var(--body);letter-spacing:.04em;white-space:nowrap;transition:background .2s,transform .2s}
+.rdbtn{margin:-2px 0}
+.rdbtn:hover,.rdback:hover{background:rgba(255,105,0,.2)}
+.rdbtn:active,.rdback:active{transform:scale(.97)}
+.rdback{border-color:var(--line);background:var(--glass);color:var(--ink)}
+.rdback:hover{background:var(--glass-2)}
+.rdbtn:focus-visible,.rdback:focus-visible{outline:2px solid var(--blue-soft);outline-offset:3px}
+.vsteps.three .vstep{padding:20px 0}
+.vsteps.three{margin-bottom:26px}
+@media (max-width:900px){.vsteps.three .vstep{padding:9px 0}.vsteps.three{margin-bottom:10px}.vsteps.three .vstep span{display:block;font-size:.78rem}}
+.soon{display:inline-block;vertical-align:middle;margin-left:8px;padding:2px 8px;border-radius:999px;border:1px solid rgba(255,105,0,.55);color:#FFB070;font:600 .62rem/1.4 var(--body);font-style:normal;letter-spacing:.1em;text-transform:uppercase}
+.vstage .main{transition:opacity .5s ease,visibility 0s linear .5s}
+.vstage.rd-on .main{opacity:0;visibility:hidden;pointer-events:none}
+.rdv{position:absolute;inset:76px 0 88px;z-index:2;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px;padding:0 var(--gutter-r) 0 var(--gutter);opacity:0;visibility:hidden;transform:translate3d(0,18px,0);transition:opacity .5s ease,transform .8s cubic-bezier(.2,.7,.2,1),visibility 0s linear .8s}
+.vstage.rd-on .rdv{opacity:1;visibility:visible;transform:none;transition-delay:.2s,.2s,0s}
+.rdhead{display:flex;align-items:flex-end;justify-content:space-between;gap:16px;width:100%;max-width:1240px}
+.rdhead .eb{font:500 .78rem var(--body);letter-spacing:.14em;text-transform:uppercase;color:var(--blue-soft);margin:0 0 8px}
+.rdhead h3{font:300 clamp(1.8rem,3.4vw,2.8rem)/1.05 var(--display);letter-spacing:-.03em;margin:0}
+.rdscroll{width:100%;max-width:1240px;display:flex;justify-content:center}
+.rdimg{display:block;max-width:100%;width:auto;height:auto;max-height:calc(100svh - 76px - 88px - 118px);object-fit:contain;filter:drop-shadow(0 30px 60px rgba(0,0,0,.5))}
+.rcap{margin:10px 0 0;color:var(--muted);font:500 .95rem var(--body)}
+@media (max-width:900px){
+  .rdv{gap:12px}
+  .rdhead h3{font-size:1.5rem}
+  .rdscroll{overflow-x:auto;overflow-y:hidden;justify-content:flex-start;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+  .rdscroll::-webkit-scrollbar{display:none}
+  .rdimg{max-width:none;max-height:none;height:min(42svh,340px);width:auto}
+  .rcap{font-size:.85rem}
+  .rdbtn,.rdback{height:32px;padding:0 12px}
+}
+@media (prefers-reduced-motion:reduce){.rdv,.vstage .main{transition:none!important}}
 </style>
 </head>
 <body>
@@ -383,26 +417,25 @@ html,body{height:100%;overflow:hidden}
 
 <section class="slide stage vstage" id="estacionamientos" data-name="Estacionamiento Digital" style="--gx:78%;--gy:50%;--gc:rgba(47,123,255,.3)">
   <div class="glow"></div>
-  <div class="wrap">
+  <div class="wrap main">
     <div class="left">
       <div class="top">
-      <p class="tag"><b>01</b>Vertical</p>
+      <div class="tagrow"><p class="tag"><b>01</b>Vertical</p><button type="button" class="rdbtn" data-rd="on">Ver rediseño →</button></div>
       <h2>Estacionamiento <b>Digital</b></h2>
-      <p class="kicker">Entrar y salir sin boleto</p>
+      <p class="kicker">Entrar, pagar y salir desde el celular</p>
       <p class="lede">Estacionamientos con pago digital: menos efectivo de por medio y una operación más transparente.</p>
       </div>
       <div class="bot">
       <div class="big txt">Sin <b style="font-weight:500">filas</b></div>
-      <div class="cap"><em>para pagar: el cobro es automático al salir</em></div>
+      <div class="cap"><em>para pagar: desde la app, la web o WhatsApp</em></div>
       </div>
     </div>
     <div class="glass panel">
-      <p class="vhead" style="margin-top:22px">Cómo funciona</p>
-      <ol class="vsteps">
-        <li class="vstep"><i>1</i><div><b>Entra y estaciona</b><span>Sin trámite adicional</span></div></li>
-        <li class="vstep"><i>2</i><div><b>Escanea el QR del tótem</b><span>Al salir</span></div></li>
-        <li class="vstep"><i>3</i><div><b>Cobro automático</b><span>Con el método de pago que elija</span></div></li>
-        <li class="vstep"><i>4</i><div><b>Factura automática</b><span>Sin costo</span></div></li>
+      <p class="vhead" style="margin-top:22px">Tres formas de usarlo</p>
+      <ol class="vsteps three">
+        <li class="vstep"><i>1</i><div><b>Single Check</b><span>Convierte el boleto en digital con su QR</span></div></li>
+        <li class="vstep"><i>2</i><div><b>Double Check</b><span>La transacción siempre pasa por Kigo</span></div></li>
+        <li class="vstep"><i>3</i><div><b>Kigo Flow <em class="soon">Próximamente</em></b><span>Tu placa es tu pase: la cámara la lee al entrar y salir</span></div></li>
       </ol>
       <p class="vhead">Para quién</p>
       <div class="who">
@@ -413,14 +446,21 @@ html,body{height:100%;overflow:hidden}
       </div>
     </div>
   </div>
+  <div class="rdv" aria-hidden="true">
+    <div class="rdhead">
+      <div><p class="eb">Lo que estamos rediseñando</p><h3>Escáner de estacionamiento</h3><p class="rcap">Escanear el boleto, Mis códigos y Mi QR</p></div>
+      <button type="button" class="rdback" data-rd="off">← Volver</button>
+    </div>
+    <div class="rdscroll"><img class="rdimg" src="img/rediseno-escaner.png" alt="Captura del rediseño del escáner de Kigo: lectura de boleto, Mis códigos y Mi QR" decoding="async"></div>
+  </div>
 </section>
 
 <section class="slide stage vstage" id="parquimetros" data-name="Parquímetro" style="--gx:78%;--gy:50%">
   <div class="glow"></div>
-  <div class="wrap">
+  <div class="wrap main">
     <div class="left">
       <div class="top">
-      <p class="tag"><b>02</b>Vertical</p>
+      <div class="tagrow"><p class="tag"><b>02</b>Vertical</p><button type="button" class="rdbtn" data-rd="on">Ver rediseño →</button></div>
       <h2><b>Parquímetro</b></h2>
       <p class="kicker">Paga tu lugar en la vía pública, desde el celular</p>
       <p class="lede">Pago del lugar de estacionamiento en la vía pública, por zona y por tiempo, sin efectivo ni monedas.</p>
@@ -447,14 +487,21 @@ html,body{height:100%;overflow:hidden}
       </div>
     </div>
   </div>
+  <div class="rdv" aria-hidden="true">
+    <div class="rdhead">
+      <div><p class="eb">Lo que estamos rediseñando</p><h3>Parquímetro</h3><p class="rcap">Mapa, placa, tiempo, pago y sesión activa</p></div>
+      <button type="button" class="rdback" data-rd="off">← Volver</button>
+    </div>
+    <div class="rdscroll"><img class="rdimg" src="img/rediseno-parquimetro.png" alt="Captura del rediseño del parquímetro: mapa, foto de la placa, tiempo, pago exitoso y sesión activa" decoding="async"></div>
+  </div>
 </section>
 
 <section class="slide stage vstage" id="accesos" data-name="Control de Accesos" data-warm="1" style="--gx:78%;--gy:50%;--gc:rgba(255,105,0,.22)">
   <div class="glow"></div>
-  <div class="wrap">
+  <div class="wrap main">
     <div class="left">
       <div class="top">
-      <p class="tag"><b>03</b>Vertical</p>
+      <div class="tagrow"><p class="tag"><b>03</b>Vertical</p><button type="button" class="rdbtn" data-rd="on">Ver rediseño →</button></div>
       <h2>Control de <b>Accesos</b></h2>
       <p class="kicker">Un QR para entrar</p>
       <p class="lede">Acceso a fraccionamientos, oficinas, parques industriales y eventos desde el teléfono.</p>
@@ -480,6 +527,13 @@ html,body{height:100%;overflow:hidden}
         <div class="glass hl"><b>Eventos</b><span>Pulsera y QR de Kigo en el Torneo de la Amistad</span></div>
       </div>
     </div>
+  </div>
+  <div class="rdv" aria-hidden="true">
+    <div class="rdhead">
+      <div><p class="eb">Lo que estamos rediseñando</p><h3>Control de Accesos</h3><p class="rcap">Invitar a alguien, cambiar de lugar y compartir su QR</p></div>
+      <button type="button" class="rdback" data-rd="off">← Volver</button>
+    </div>
+    <div class="rdscroll"><img class="rdimg" src="img/rediseno-accesos.png" alt="Captura del rediseño de Comunidades: invitar a alguien, cambiar de lugar y QR de la invitación" decoding="async"></div>
   </div>
 </section>
 </main>
@@ -544,11 +598,34 @@ var EN={
 "Administración":"Administration","Consola Kigo Communities":"Kigo Communities console",
 "Eventos":"Events","Pulsera y QR de Kigo en el Torneo de la Amistad":"Kigo wristband and QR at the Torneo de la Amistad"
 };
-var NAMES={"Estacionamiento Digital":"Digital Parking","Parquímetro":"Parking Meter","Control de Accesos":"Access Control"};
-var SEL=".tag,h2,.kicker,.lede,.big.txt,.big small,.cap em,.vhead,.vstep b,.vstep span,.who b,.who span";
+var EN2={
+"Entrar, pagar y salir desde el celular":"Enter, pay and exit from your phone",
+"para pagar: desde la app, la web o WhatsApp":"to pay: from the app, the web or WhatsApp",
+"Tres formas de usarlo":"Three ways to use it",
+"Convierte el boleto en digital con su QR":"Turn the ticket into a digital one with its QR",
+"La transacción siempre pasa por Kigo":"The transaction always goes through Kigo",
+"Kigo Flow <em class=\"soon\">Próximamente</em>":"Kigo Flow <em class=\"soon\">Coming soon</em>",
+"Tu placa es tu pase: la cámara la lee al entrar y salir":"Your plate is your pass: the camera reads it on entry and exit",
+"Ver rediseño →":"View redesign →","← Volver":"← Back",
+"Lo que estamos rediseñando":"What we are redesigning",
+"Escáner de estacionamiento":"Parking scanner",
+"Escanear el boleto, Mis códigos y Mi QR":"Scan the ticket, My codes and My QR",
+"Mapa, placa, tiempo, pago y sesión activa":"Map, plate, time, payment and active session",
+"Invitar a alguien, cambiar de lugar y compartir su QR":"Invite someone, switch place and share their QR"
+};
+for(var k in EN2)EN[k]=EN2[k];
+var NAMES={"Estacionamiento Digital":"Digital Parking","Parquímetro":"Parking Meter","Control de Accesos":"Access Control"};NAMES["Escáner de estacionamiento"]="Parking scanner";
+var SEL=".tag,h2,.rdbtn,.rdback,.rdhead .eb,.rdhead h3,.rcap,.kicker,.lede,.big.txt,.big small,.cap em,.vhead,.vstep b,.vstep span,.who b,.who span";
 var LANG="es";
 function nm(sl){return LANG==="en"?(NAMES[sl.dataset.name]||sl.dataset.name):sl.dataset.name}
-function setWhere(){if(idx<0)return;where.innerHTML="<b>"+("0"+(idx+1)).slice(-2)+" / "+("0"+total).slice(-2)+"</b> · "+nm(slides[idx])}
+function rdOn(){return idx>=0&&slides[idx].classList.contains("rd-on")}
+function setWhere(){if(idx<0)return;where.innerHTML="<b>"+("0"+(idx+1)).slice(-2)+" / "+("0"+total).slice(-2)+"</b> · "+nm(slides[idx])+(rdOn()?" · "+(LANG==="en"?"Redesign":"Rediseño"):"")}
+function setRd(on){
+  var sl=slides[idx];sl.classList.toggle("rd-on",on);
+  $(".rdv",sl).setAttribute("aria-hidden",on?"false":"true");
+  $$(".main",sl).forEach(function(m){if(on)m.setAttribute("inert","");else m.removeAttribute("inert")});
+  setWhere();try{history.replaceState(null,"","#s"+(idx+1)+(on?"r":""))}catch(e){}
+}
 window.__missing=[];
 function setLang(l,keep){
   LANG=l;document.documentElement.lang=l;
@@ -578,19 +655,23 @@ function count(sl){
   paint(0);var t0=null;
   (function step(t){if(my!==tok)return;if(t0==null)t0=t;var k=clamp((t-t0-500)/1600);paint(k);if(k<1)requestAnimationFrame(step)})(performance.now());
 }
-function go(i,dir){
-  i=clamp(i,0,total-1);if(i===idx)return;idx=i;
+function go(i,dir,wantRd){
+  i=clamp(i,0,total-1);if(i===idx&&!wantRd)return;idx=i;
+  slides.forEach(function(s){s.classList.remove("rd-on");var v=$(".rdv",s);if(v)v.setAttribute("aria-hidden","true");$$(".main",s).forEach(function(m){m.removeAttribute("inert")})});
   slides.forEach(function(s,j){s.classList.toggle("on",j===i);s.classList.toggle("prev",j<i);if(j===i)s.removeAttribute("inert");else s.setAttribute("inert","")});
   document.documentElement.style.setProperty("--i",i);
   bg.classList.toggle("is-warm",slides[i].dataset.warm==="1");
   setWhere();
   meter.style.transform="scaleX("+((i+1)/total)+")";
   segBtns.forEach(function(b,j){b.classList.toggle("on",j===i);b.classList.toggle("done",j<i)});
-  btnPrev.disabled=i===0;btnNext.disabled=i===total-1;
+  btnPrev.disabled=false;btnNext.disabled=false;
   try{history.replaceState(null,"","#s"+(i+1))}catch(e){}
   count(slides[i]);
+  if(wantRd)setRd(true);
 }
-function next(){go(idx+1,1)}function prev(){go(idx-1,-1)}
+function next(){if(!rdOn()){setRd(true);return}go(idx+1,1)}
+function prev(){if(rdOn()){setRd(false);return}go(idx-1,-1,true)}
+$$("[data-rd]").forEach(function(b){b.addEventListener("click",function(){setRd(b.dataset.rd==="on")})});
 btnNext.addEventListener("click",next);btnPrev.addEventListener("click",prev);
 document.addEventListener("keydown",function(e){
   if(e.metaKey||e.ctrlKey||e.altKey)return;var k=e.key;if((k===" "||k==="Enter")&&e.target.closest&&e.target.closest("button"))return;
@@ -602,12 +683,12 @@ document.addEventListener("keydown",function(e){
 function toggleFs(){try{if(document.fullscreenElement)document.exitFullscreen();else document.documentElement.requestFullscreen().catch(function(){})}catch(e){}}
 $("#fs").addEventListener("click",toggleFs);
 var sx=null,sy=null;
-document.addEventListener("touchstart",function(e){if(e.touches.length!==1)return;sx=e.touches[0].clientX;sy=e.touches[0].clientY},{passive:true});
+document.addEventListener("touchstart",function(e){sx=null;if(e.touches.length!==1)return;if(e.target.closest&&e.target.closest(".rdscroll"))return;sx=e.touches[0].clientX;sy=e.touches[0].clientY},{passive:true});
 document.addEventListener("touchend",function(e){if(sx==null)return;var t=e.changedTouches[0],dx=t.clientX-sx,dy=t.clientY-sy;sx=null;if(Math.abs(dx)>50&&Math.abs(dx)>Math.abs(dy)*1.3){dx<0?next():prev()}},{passive:true});
-var start=0,m=/^#s(\d+)$/.exec(location.hash||"");if(m)start=clamp(parseInt(m[1],10)-1,0,total-1);
-window.addEventListener("hashchange",function(){var mm=/^#s(\d+)$/.exec(location.hash||"");if(mm){var j=clamp(parseInt(mm[1],10)-1,0,total-1);if(j!==idx)go(j,j>idx?1:-1)}});
+var start=0,m=/^#s(\d+)(r?)$/.exec(location.hash||"");if(m)start=clamp(parseInt(m[1],10)-1,0,total-1);var startRd=!!(m&&m[2]);
+window.addEventListener("hashchange",function(){var mm=/^#s(\d+)(r?)$/.exec(location.hash||"");if(mm){var j=clamp(parseInt(mm[1],10)-1,0,total-1);if(j!==idx||(!!mm[2])!==rdOn())go(j,j>idx?1:-1,!!mm[2])}});
 var ql=/[?&]lang=(en|es)/.exec(location.search),saved=null;try{saved=localStorage.getItem("lang")}catch(e){}
-go(start,1);
+go(start,1,startRd);
 setLang(ql?ql[1]:(saved==="en"||saved==="es"?saved:"es"),!!ql);
 })();
 </script>
