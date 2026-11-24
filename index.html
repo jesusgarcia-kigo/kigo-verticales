@@ -388,6 +388,8 @@ html,body{height:100%;overflow:hidden}
 .rdhead h3{font:300 clamp(1.8rem,3.4vw,2.8rem)/1.05 var(--display);letter-spacing:-.03em;margin:0}
 .rdscroll{width:100%;max-width:1240px;display:flex;justify-content:center}
 .rdimg{display:block;max-width:100%;width:auto;height:auto;max-height:calc(100svh - 76px - 88px - 118px);object-fit:contain;filter:drop-shadow(0 30px 60px rgba(0,0,0,.5))}
+html[lang="es"] .rnote,.rnote.hide{display:none}
+.rnote{margin:6px 0 0;color:var(--faint);font:500 .8rem var(--body)}
 .rcap{margin:10px 0 0;color:var(--muted);font:500 .95rem var(--body)}
 @media (max-width:900px){
   .rdv{gap:12px}
@@ -448,10 +450,10 @@ html,body{height:100%;overflow:hidden}
   </div>
   <div class="rdv" aria-hidden="true">
     <div class="rdhead">
-      <div><p class="eb">Lo que estamos rediseñando</p><h3>Escáner de estacionamiento</h3><p class="rcap">Escanear el boleto, Mis códigos y Mi QR</p></div>
+      <div><p class="eb">Lo que estamos rediseñando</p><h3>Escáner de estacionamiento</h3><p class="rcap">Escanear el boleto, Mis códigos y Mi QR</p><p class="rnote">App screens are shown in Spanish.</p></div>
       <button type="button" class="rdback" data-rd="off">← Volver</button>
     </div>
-    <div class="rdscroll"><img class="rdimg" src="img/rediseno-escaner.png" alt="Captura del rediseño del escáner de Kigo: lectura de boleto, Mis códigos y Mi QR" decoding="async"></div>
+    <div class="rdscroll"><img class="rdimg" src="img/rediseno-escaner.png" data-es="img/rediseno-escaner.png" data-en="img/rediseno-escaner-en.png" data-alt-es="Captura del rediseño del escáner de Kigo: lectura de boleto, Mis códigos y Mi QR" data-alt-en="Redesigned Kigo scanner screens: ticket reading, My codes and My QR" alt="Captura del rediseño del escáner de Kigo: lectura de boleto, Mis códigos y Mi QR" decoding="async"></div>
   </div>
 </section>
 
@@ -489,10 +491,10 @@ html,body{height:100%;overflow:hidden}
   </div>
   <div class="rdv" aria-hidden="true">
     <div class="rdhead">
-      <div><p class="eb">Lo que estamos rediseñando</p><h3>Parquímetro</h3><p class="rcap">Mapa, placa, tiempo, pago y sesión activa</p></div>
+      <div><p class="eb">Lo que estamos rediseñando</p><h3>Parquímetro</h3><p class="rcap">Mapa, placa, tiempo, pago y sesión activa</p><p class="rnote">App screens are shown in Spanish.</p></div>
       <button type="button" class="rdback" data-rd="off">← Volver</button>
     </div>
-    <div class="rdscroll"><img class="rdimg" src="img/rediseno-parquimetro.png" alt="Captura del rediseño del parquímetro: mapa, foto de la placa, tiempo, pago exitoso y sesión activa" decoding="async"></div>
+    <div class="rdscroll"><img class="rdimg" src="img/rediseno-parquimetro.png" data-es="img/rediseno-parquimetro.png" data-en="img/rediseno-parquimetro-en.png" data-alt-es="Captura del rediseño del parquímetro: mapa, foto de la placa, tiempo, pago exitoso y sesión activa" data-alt-en="Redesigned parking meter screens: map, plate photo, time, successful payment and active session" alt="Captura del rediseño del parquímetro: mapa, foto de la placa, tiempo, pago exitoso y sesión activa" decoding="async"></div>
   </div>
 </section>
 
@@ -530,10 +532,10 @@ html,body{height:100%;overflow:hidden}
   </div>
   <div class="rdv" aria-hidden="true">
     <div class="rdhead">
-      <div><p class="eb">Lo que estamos rediseñando</p><h3>Control de Accesos</h3><p class="rcap">Invitar a alguien, cambiar de lugar y compartir su QR</p></div>
+      <div><p class="eb">Lo que estamos rediseñando</p><h3>Control de Accesos</h3><p class="rcap">Invitar a alguien, cambiar de lugar y compartir su QR</p><p class="rnote">App screens are shown in Spanish.</p></div>
       <button type="button" class="rdback" data-rd="off">← Volver</button>
     </div>
-    <div class="rdscroll"><img class="rdimg" src="img/rediseno-accesos.png" alt="Captura del rediseño de Comunidades: invitar a alguien, cambiar de lugar y QR de la invitación" decoding="async"></div>
+    <div class="rdscroll"><img class="rdimg" src="img/rediseno-accesos.png" data-es="img/rediseno-accesos.png" data-en="img/rediseno-accesos-en.png" data-alt-es="Captura del rediseño de Comunidades: invitar a alguien, cambiar de lugar y QR de la invitación" data-alt-en="Redesigned Communities screens: invite someone, switch place and invitation QR" alt="Captura del rediseño de Comunidades: invitar a alguien, cambiar de lugar y QR de la invitación" decoding="async"></div>
   </div>
 </section>
 </main>
@@ -613,6 +615,7 @@ var EN2={
 "Mapa, placa, tiempo, pago y sesión activa":"Map, plate, time, payment and active session",
 "Invitar a alguien, cambiar de lugar y compartir su QR":"Invite someone, switch place and share their QR"
 };
+EN2["Parquímetro"]="Parking Meter";EN2["Control de Accesos"]="Access Control";
 for(var k in EN2)EN[k]=EN2[k];
 var NAMES={"Estacionamiento Digital":"Digital Parking","Parquímetro":"Parking Meter","Control de Accesos":"Access Control"};NAMES["Escáner de estacionamiento"]="Parking scanner";
 var SEL=".tag,h2,.rdbtn,.rdback,.rdhead .eb,.rdhead h3,.rcap,.kicker,.lede,.big.txt,.big small,.cap em,.vhead,.vstep b,.vstep span,.who b,.who span";
@@ -635,6 +638,13 @@ function setLang(l,keep){
     if(out==null){out=es;if(window.__missing.indexOf(es)<0)window.__missing.push(es)}
     n.innerHTML=out;
   });
+  $$(".rdimg").forEach(function(im){
+    im.alt=l==="en"?im.dataset.altEn:im.dataset.altEs;
+    var note=im.closest(".rdv").querySelector(".rnote");
+    if(l==="en"){var t=new Image();t.onload=function(){if(LANG==="en"){im.src=im.dataset.en;note.classList.add("hide")}};t.onerror=function(){note.classList.remove("hide")};t.src=im.dataset.en}
+    else{im.src=im.dataset.es;note.classList.remove("hide")}
+  });
+  $("#deck").setAttribute("aria-label",l==="en"?"Presentation":"Presentación");
   document.title=l==="en"?"Kigo's three verticals":"Las tres verticales de Kigo";
   $$(".lang button").forEach(function(b){b.setAttribute("aria-pressed",b.dataset.lang===l?"true":"false")});
   btnPrev.setAttribute("aria-label",l==="en"?"Previous slide":"Diapositiva anterior");
