@@ -358,6 +358,13 @@ html,body{height:100%;overflow:hidden}
 .vstage h2{font-size:clamp(2.3rem,4.8vw,4.2rem)}
 .vstage .panel{min-height:0}
 @media (max-width:900px){.vstage .wrap{gap:12px;align-content:center}.vstage .left{padding:0;gap:10px}.vstage .left h2{min-height:0;font-size:clamp(1.7rem,7.4vw,2.2rem);margin-bottom:0}.vstage .tag{margin-bottom:8px}.kicker{font-size:1rem;margin:6px 0 0}.vstage .who .glass{min-height:0;padding:8px 12px}.vstage .big{font-size:clamp(2.6rem,13vw,3.6rem)}.vstage .big.txt{font-size:clamp(2.2rem,11vw,3rem)}.vstage .cap{margin-top:6px;font-size:.85rem;min-height:0}.vstage .panel .vhead{margin-top:12px!important}.vstep{padding:6px 0}.vstep i{width:28px;height:28px}.vstep b{font-size:1rem}.vsteps{margin-bottom:10px}.who{margin-bottom:12px}.who b{font-size:.9rem}}
+.bar .right{display:flex;align-items:center;gap:10px;pointer-events:auto}
+.lang{display:flex;gap:2px;padding:3px;border-radius:999px;background:rgba(6,16,27,.6);border:1px solid var(--line);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px)}
+.lang button{all:unset;box-sizing:border-box;cursor:pointer;min-width:38px;height:30px;display:grid;place-items:center;border-radius:999px;font:600 .74rem var(--body);letter-spacing:.08em;color:var(--muted);transition:background .2s,color .2s}
+.lang button:hover{color:var(--ink)}
+.lang button[aria-pressed="true"]{background:var(--ink);color:#06101B}
+.lang button:focus-visible{outline:2px solid var(--blue-soft);outline-offset:2px}
+@media (max-width:900px){.bar .right{gap:6px}.where{min-width:0;padding:6px 10px;font-size:.62rem}.lang button{min-width:34px}}
 </style>
 </head>
 <body>
@@ -365,7 +372,7 @@ html,body{height:100%;overflow:hidden}
 <header class="bar">
   <div class="wrap">
     <div class="brand"><img class="kigo" src="img/logo-kigo.svg" alt="Kigo"></div>
-    <div class="where" id="where" aria-live="polite"></div>
+    <div class="right"><div class="where" id="where" aria-live="polite"></div><div class="lang" role="group" aria-label="Idioma / Language"><button type="button" data-lang="es" aria-pressed="true">ES</button><button type="button" data-lang="en" aria-pressed="false">EN</button></div></div>
   </div>
 </header>
 <div class="bgfx" id="bgfx" data-mode="dim" aria-hidden="true">
@@ -495,6 +502,75 @@ var bg=$("#bgfx"),where=$("#where"),meter=$("#meter"),segsEl=$("#segs"),btnPrev=
 slides.forEach(function(sl){$$(".wrap > *",sl).forEach(function(p,pi){$$(":scope > *",p).forEach(function(c,i){c.style.setProperty("--k",pi*3+i)})})});
 slides.forEach(function(sl,i){var b=document.createElement("button");b.type="button";b.setAttribute("aria-label","Ir a "+sl.dataset.name);b.addEventListener("click",function(){go(i,i>idx?1:-1)});segsEl.appendChild(b)});
 var segBtns=$$("button",segsEl);
+var EN={
+"Vertical":"Vertical",
+"Estacionamiento <b>Digital</b>":"Digital <b>Parking</b>",
+"<b>Parquímetro</b>":"<b>Parking Meter</b>",
+"Control de <b>Accesos</b>":"Access <b>Control</b>",
+"Entrar y salir sin boleto":"Enter and exit without a ticket",
+"Paga tu lugar en la vía pública, desde el celular":"Pay for your on-street spot, from your phone",
+"Un QR para entrar":"One QR to get in",
+"Estacionamientos con pago digital: menos efectivo de por medio y una operación más transparente.":"Parking lots with digital payment: less cash involved and more transparent operations.",
+"Pago del lugar de estacionamiento en la vía pública, por zona y por tiempo, sin efectivo ni monedas.":"Payment for the on-street parking spot, by zone and by time, with no cash or coins.",
+"Acceso a fraccionamientos, oficinas, parques industriales y eventos desde el teléfono.":"Access to residential communities, offices, industrial parks and events from your phone.",
+"Sin <b style=\"font-weight:500\">filas</b>":"No <b style=\"font-weight:500\">lines</b>",
+"espacios":"spaces","asistentes":"attendees",
+"para pagar: el cobro es automático al salir":"to pay: the charge is automatic on exit",
+"de parquímetro operan con Kigo en Monterrey, junto con el gobierno municipal":"of parking meters run on Kigo in Monterrey, together with the municipal government",
+"esperados en el Torneo de la Amistad 2026, con Kigo como plataforma de acceso":"expected at the 2026 Torneo de la Amistad, with Kigo as the access platform",
+"Cómo funciona":"How it works","Para quién":"Who it's for",
+"Entra y estaciona":"Enter and park","Sin trámite adicional":"No extra steps",
+"Escanea el QR del tótem":"Scan the totem QR","Al salir":"On the way out",
+"Cobro automático":"Automatic charge","Con el método de pago que elija":"With the payment method they choose",
+"Factura automática":"Automatic invoice","Sin costo":"At no cost",
+"Conductores":"Drivers","Pagan desde la app, la web o WhatsApp":"Pay from the app, the web or WhatsApp",
+"Operadores":"Operators","Consola de operaciones, tickets, cortesías y comercios":"Console for operations, tickets, courtesies and businesses",
+"Pensiones":"Monthly parking","Usuarios recurrentes sin tarjetas":"Recurring users, no cards",
+"Equipos propios o de terceros":"Own or third-party equipment","Opera con las máquinas que ya tienes":"Works with the machines you already have",
+"Elige la zona":"Choose the zone","En el mapa, donde estacionó":"On the map, where they parked",
+"Confirma su placa":"Confirm the plate","El vehículo queda ligado a la sesión":"The vehicle is linked to the session",
+"Elige el tiempo":"Choose the time","Paga solo lo que va a usar":"Pay only for what you use",
+"Paga y listo":"Pay and done","Sesión activa y recibo en la app":"Active session and receipt in the app",
+"Pagan y siguen su sesión desde la app":"Pay and follow their session from the app",
+"Gobiernos y municipios":"Governments and municipalities","Monterrey y Puebla operan con Kigo":"Monterrey and Puebla run on Kigo",
+"Consola municipal":"Municipal console","Permisos, pagos y mapa de cobertura":"Permits, payments and coverage map",
+"Pase y Pensiones":"Pass and Monthly plans","Monterrey y Puebla":"Monterrey and Puebla",
+"El residente invita":"The resident invites","A su visita, desde la app":"Their visitor, from the app",
+"Recibe su QR de acceso":"Gets an access QR","Personal y de un solo uso o recurrente":"Personal, single-use or recurring",
+"El guardia lo valida":"The guard validates it","En el acceso, en segundos":"At the gate, in seconds",
+"Queda el registro":"A record is kept","Información digital y auditable en tiempo real":"Digital, auditable information in real time",
+"Residentes y visitas":"Residents and visitors","Entran con su QR":"Enter with their QR",
+"Guardias":"Guards","Validan accesos desde su operación":"Validate access from their operation",
+"Administración":"Administration","Consola Kigo Communities":"Kigo Communities console",
+"Eventos":"Events","Pulsera y QR de Kigo en el Torneo de la Amistad":"Kigo wristband and QR at the Torneo de la Amistad"
+};
+var NAMES={"Estacionamiento Digital":"Digital Parking","Parquímetro":"Parking Meter","Control de Accesos":"Access Control"};
+var SEL=".tag,h2,.kicker,.lede,.big.txt,.big small,.cap em,.vhead,.vstep b,.vstep span,.who b,.who span";
+var LANG="es";
+function nm(sl){return LANG==="en"?(NAMES[sl.dataset.name]||sl.dataset.name):sl.dataset.name}
+function setWhere(){if(idx<0)return;where.innerHTML="<b>"+("0"+(idx+1)).slice(-2)+" / "+("0"+total).slice(-2)+"</b> · "+nm(slides[idx])}
+window.__missing=[];
+function setLang(l,keep){
+  LANG=l;document.documentElement.lang=l;
+  $$(SEL).forEach(function(n){
+    if(n.dataset.es==null)n.dataset.es=n.innerHTML;
+    var es=n.dataset.es,out=l==="en"?EN[es]:es;
+    if(out==null){out=es;if(window.__missing.indexOf(es)<0)window.__missing.push(es)}
+    n.innerHTML=out;
+  });
+  document.title=l==="en"?"Kigo's three verticals":"Las tres verticales de Kigo";
+  $$(".lang button").forEach(function(b){b.setAttribute("aria-pressed",b.dataset.lang===l?"true":"false")});
+  btnPrev.setAttribute("aria-label",l==="en"?"Previous slide":"Diapositiva anterior");
+  btnNext.setAttribute("aria-label",l==="en"?"Next slide":"Diapositiva siguiente");
+  $("#fs").setAttribute("aria-label",l==="en"?"Full screen":"Pantalla completa");
+  slides.forEach(function(sl,i){segBtns[i].setAttribute("aria-label",(l==="en"?"Go to ":"Ir a ")+nm(sl))});
+  N=function(n){return Number(n).toLocaleString(l==="en"?"en-US":"es-MX",{maximumFractionDigits:0})};
+  $$("[data-to]").forEach(function(n){if(idx>=0&&slides[idx].contains(n))n.textContent=N(parseFloat(n.dataset.to))});
+  setWhere();
+  if(!keep){try{localStorage.setItem("lang",l)}catch(e){}}
+}
+$$(".lang button").forEach(function(b){b.addEventListener("click",function(){setLang(b.dataset.lang)})});
+
 function count(sl){
   var nodes=$$("[data-to]",sl),my=++tok;
   function paint(k){nodes.forEach(function(n){n.textContent=N(parseFloat(n.dataset.to)*ease(k))})}
@@ -507,7 +583,7 @@ function go(i,dir){
   slides.forEach(function(s,j){s.classList.toggle("on",j===i);s.classList.toggle("prev",j<i);if(j===i)s.removeAttribute("inert");else s.setAttribute("inert","")});
   document.documentElement.style.setProperty("--i",i);
   bg.classList.toggle("is-warm",slides[i].dataset.warm==="1");
-  where.innerHTML="<b>"+("0"+(i+1)).slice(-2)+" / "+("0"+total).slice(-2)+"</b> · "+slides[i].dataset.name;
+  setWhere();
   meter.style.transform="scaleX("+((i+1)/total)+")";
   segBtns.forEach(function(b,j){b.classList.toggle("on",j===i);b.classList.toggle("done",j<i)});
   btnPrev.disabled=i===0;btnNext.disabled=i===total-1;
@@ -517,7 +593,7 @@ function go(i,dir){
 function next(){go(idx+1,1)}function prev(){go(idx-1,-1)}
 btnNext.addEventListener("click",next);btnPrev.addEventListener("click",prev);
 document.addEventListener("keydown",function(e){
-  if(e.metaKey||e.ctrlKey||e.altKey)return;var k=e.key;
+  if(e.metaKey||e.ctrlKey||e.altKey)return;var k=e.key;if((k===" "||k==="Enter")&&e.target.closest&&e.target.closest("button"))return;
   if(k==="ArrowRight"||k==="PageDown"||k===" "||k==="ArrowDown"){e.preventDefault();next()}
   else if(k==="ArrowLeft"||k==="PageUp"||k==="ArrowUp"){e.preventDefault();prev()}
   else if(k==="Home"){e.preventDefault();go(0,-1)}else if(k==="End"){e.preventDefault();go(total-1,1)}
@@ -530,7 +606,9 @@ document.addEventListener("touchstart",function(e){if(e.touches.length!==1)retur
 document.addEventListener("touchend",function(e){if(sx==null)return;var t=e.changedTouches[0],dx=t.clientX-sx,dy=t.clientY-sy;sx=null;if(Math.abs(dx)>50&&Math.abs(dx)>Math.abs(dy)*1.3){dx<0?next():prev()}},{passive:true});
 var start=0,m=/^#s(\d+)$/.exec(location.hash||"");if(m)start=clamp(parseInt(m[1],10)-1,0,total-1);
 window.addEventListener("hashchange",function(){var mm=/^#s(\d+)$/.exec(location.hash||"");if(mm){var j=clamp(parseInt(mm[1],10)-1,0,total-1);if(j!==idx)go(j,j>idx?1:-1)}});
+var ql=/[?&]lang=(en|es)/.exec(location.search),saved=null;try{saved=localStorage.getItem("lang")}catch(e){}
 go(start,1);
+setLang(ql?ql[1]:(saved==="en"||saved==="es"?saved:"es"),!!ql);
 })();
 </script>
 </body>
